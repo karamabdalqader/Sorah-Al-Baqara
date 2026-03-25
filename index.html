@@ -90,20 +90,13 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        #save-indicator {
-            position: fixed;
-            top: 160px; 
-            right: 32px;
+        #autosave-text {
+            transition: opacity 0.5s ease;
             opacity: 0;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-            z-index: 90;
-            transform: translateY(-10px);
         }
 
-        #save-indicator.show {
+        #autosave-text.show {
             opacity: 1;
-            transform: translateY(0);
         }
     
         .page-marker {
@@ -173,6 +166,10 @@
             </div>
         </div>
         <div class="flex items-center gap-2">
+            <div id="autosave-text" class="hidden sm:flex items-center gap-1 text-accent/80 text-[10px] font-bold tracking-wider mr-2">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                <span>تلقائي</span>
+            </div>
             <button aria-label="Increase Font Size" title="Font Size" class="p-2 rounded-full hover:bg-accent/10 dark:hover:bg-accent/20 text-text-ui dark:text-gray-300 transition-colors" onclick="changeFontSize()">
                 <span class="material-symbols-outlined text-[24px] hover:scale-110 transition-transform">format_size</span>
             </button>
@@ -189,10 +186,7 @@
     </div>
 </header>
 
-<div class="flex items-center gap-3 bg-white dark:bg-[#1e1e1e] border border-accent/30 dark:border-accent/20 shadow-xl px-6 py-3 rounded-full transition-colors duration-300" id="save-indicator">
-    <span class="material-symbols-outlined text-accent text-[22px] fill-current">bookmark</span>
-    <span class="text-[11px] uppercase tracking-[0.15em] font-bold font-ui text-text-ui dark:text-gray-300 transition-colors">تم حفظ التقدم</span>
-</div>
+<!-- Removed overlay save indicator -->
 
 <main class="content-container flex flex-col items-center">
     <div class="mb-24 text-center w-full" dir="rtl">
@@ -643,7 +637,7 @@
 
 <script>
     const progressBar = document.getElementById('progress-bar');
-    const saveIndicator = document.getElementById('save-indicator');
+    const autosaveText = document.getElementById('autosave-text');
     const verseTextAr = document.getElementById('verse-progress-ar');
     const pageTextAr = document.getElementById('page-progress-ar');
     const segments = document.querySelectorAll('.verse-segment');
@@ -794,16 +788,17 @@
     }
 
     function showSaveIndicator(customText) {
+        if (!autosaveText) return;
         if (customText) {
-            saveIndicator.children[1].textContent = customText;
+            autosaveText.children[1].textContent = customText;
         } else {
-            saveIndicator.children[1].textContent = "تم حفظ التقدم";
+            autosaveText.children[1].textContent = "تلقائي";
         }
-        saveIndicator.classList.add('show');
+        autosaveText.classList.add('show');
         clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
-            saveIndicator.classList.remove('show');
-        }, 3000);
+            autosaveText.classList.remove('show');
+        }, 1500);
     }
 </script>
 </body>
