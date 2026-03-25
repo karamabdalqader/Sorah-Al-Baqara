@@ -2,7 +2,7 @@ import json
 import urllib.request
 import re
 
-url = "https://api.alquran.cloud/v1/surah/2/quran-uthmani"
+url = "https://api.alquran.cloud/v1/surah/2/quran-simple"
 
 req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
 try:
