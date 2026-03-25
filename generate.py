@@ -335,7 +335,6 @@ html_template = """<!DOCTYPE html>
 
     function savePosition(pos) {
         localStorage.setItem('alBaqarahScrollPos', pos);
-        showSaveIndicator("تم حفظ التقدم");
     }
 
     function restartRecitation() {
