@@ -71,7 +71,12 @@ html_template = """<!DOCTYPE html>
             max-width: 700px; 
             width: 100%;
             margin: 0 auto;
-            padding: 240px 32px 200px 32px; 
+            padding: 240px 16px 200px 16px; 
+        }
+        @media (min-width: 640px) {
+            .content-container {
+                padding: 240px 32px 200px 32px;
+            }
         }
 
         #progress-container {
@@ -127,17 +132,19 @@ html_template = """<!DOCTYPE html>
         }
     
         .page-marker {
-            position: absolute;
-            right: -160px;
-            top: 0.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 1.5em 0;
+            padding-top: 1em;
+            border-top: 1px dashed rgba(212, 175, 55, 0.3);
             font-family: 'Amiri Quran', serif;
-            font-size: 1.14em; /* relative to font-size */
+            font-size: 0.5em; /* beautifully scaled down */
             color: #D4AF37; 
             user-select: none;
-            pointer-events: none;
-            opacity: 0.6; 
+            opacity: 0.7; 
             direction: rtl;
-            white-space: nowrap;
         }
 
         .quran-text {
@@ -185,11 +192,11 @@ html_template = """<!DOCTYPE html>
 <header id="sticky-header" class="bg-[#FBF8F1]/98 dark:bg-[#1a1a1a]/98 transition-colors duration-300">
     <div class="max-w-4xl mx-auto w-full flex justify-between items-center">
         <div class="flex flex-col">
-            <h2 class="text-[12px] uppercase tracking-[0.4em] font-extrabold text-accent mb-2">سورة البقرة</h2>
-            <div class="flex items-center gap-12 arabic-stats text-text-main dark:text-gray-200 transition-colors">
-                <span class="text-3xl font-bold" id="verse-progress-ar">الآية ١ من ٢٨٦</span>
-                <div class="w-2 h-2 rounded-full bg-accent/40"></div>
-                <span class="text-3xl font-bold" id="page-progress-ar">الصفحة ٢ من ٤٩</span>
+            <h2 class="text-[10px] sm:text-[12px] uppercase tracking-[0.4em] font-extrabold text-accent mb-1 sm:mb-2">سورة البقرة</h2>
+            <div class="flex items-center gap-4 sm:gap-12 arabic-stats text-text-main dark:text-gray-200 transition-colors">
+                <span class="text-xl sm:text-3xl font-bold" id="verse-progress-ar">الآية ١ من ٢٨٦</span>
+                <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-accent/40"></div>
+                <span class="text-xl sm:text-3xl font-bold" id="page-progress-ar">الصفحة ٢ من ٤٩</span>
             </div>
         </div>
         <div class="flex items-center gap-2">
@@ -216,8 +223,8 @@ html_template = """<!DOCTYPE html>
 <!-- Removed overlay save indicator -->
 
 <main class="content-container flex flex-col items-center">
-    <div class="mb-24 text-center w-full" dir="rtl">
-        <h1 class="font-arabic text-[42px] text-text-ui dark:text-gray-400 tracking-wide opacity-80 transition-colors duration-300">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h1>
+    <div class="mb-16 sm:mb-24 text-center w-full" dir="rtl">
+        <h1 class="font-arabic text-[32px] sm:text-[42px] text-text-ui dark:text-gray-400 tracking-wide opacity-80 transition-colors duration-300">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h1>
     </div>
 
     <article class="quran-text w-full">
@@ -242,7 +249,7 @@ html_template = """<!DOCTYPE html>
 
     let scrollTimeout;
     let saveTimeout;
-    let currentFontSize = 56;
+    let currentFontSize = window.innerWidth < 640 ? 40 : 56;
 
     const toArabicNumerals = (num) => {
         const arabicMap = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
