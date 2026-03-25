@@ -782,21 +782,26 @@
         let currentPage = minPage;
         let currentVerse = 1;
 
-        const viewportMiddle = window.innerHeight / 2;
-        
+        let foundPage = false;
         segments.forEach(segment => {
-            const rect = segment.getBoundingClientRect();
-            if (rect.top <= viewportMiddle && rect.bottom >= viewportMiddle) {
-                currentPage = segment.dataset.page;
-            } else if (rect.top <= viewportMiddle && rect.bottom > 0) {
-            	currentPage = segment.dataset.page;
+            if (!foundPage) {
+                const rect = segment.getBoundingClientRect();
+                if (rect.bottom > 150) {
+                    currentPage = segment.dataset.page;
+                    foundPage = true;
+                }
             }
         });
 
+        let foundVerse = false;
         ayahMarkers.forEach(marker => {
-            const rect = marker.getBoundingClientRect();
-            if (rect.top < window.innerHeight * 0.4 && rect.bottom > 0) {
-                currentVerse = marker.dataset.verse;
+            if (!foundVerse) {
+                const rect = marker.getBoundingClientRect();
+                // 150px threshold perfectly clears the sticky header (140px)
+                if (rect.bottom > 150) {
+                    currentVerse = marker.dataset.verse;
+                    foundVerse = true;
+                }
             }
         });
 
