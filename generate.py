@@ -192,7 +192,7 @@ html_template = """<!DOCTYPE html>
 <header id="sticky-header" class="bg-[#FBF8F1]/98 dark:bg-[#1a1a1a]/98 transition-colors duration-300">
     <div class="max-w-4xl mx-auto w-full flex justify-between items-center">
         <div class="flex flex-col">
-            <h2 class="text-[10px] sm:text-[12px] uppercase tracking-[0.4em] font-extrabold text-accent mb-1 sm:mb-2">سورة البقرة</h2>
+            <h2 class="text-[10px] sm:text-[12px] uppercase font-extrabold text-accent mb-1 sm:mb-2">سورة البقرة</h2>
             <div class="flex items-center gap-4 sm:gap-12 arabic-stats text-text-main dark:text-gray-200 transition-colors">
                 <span class="text-xl sm:text-3xl font-bold" id="verse-progress-ar">الآية ١ من ٢٨٦</span>
                 <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-accent/40"></div>
@@ -200,7 +200,7 @@ html_template = """<!DOCTYPE html>
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <div id="autosave-text" class="hidden sm:flex items-center gap-1 text-accent/80 text-[10px] font-bold tracking-wider mr-2">
+            <div id="autosave-text" class="hidden sm:flex items-center gap-1 text-accent/80 text-[10px] font-bold mr-2">
                 <span class="material-symbols-outlined text-[14px]">check_circle</span>
                 <span>تلقائي</span>
             </div>
@@ -224,7 +224,7 @@ html_template = """<!DOCTYPE html>
 
 <main class="content-container flex flex-col items-center">
     <div class="mb-16 sm:mb-24 text-center w-full" dir="rtl">
-        <h1 class="font-arabic text-[32px] sm:text-[42px] text-text-ui dark:text-gray-400 tracking-wide opacity-80 transition-colors duration-300">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h1>
+        <h1 class="font-arabic text-[32px] sm:text-[42px] text-text-ui dark:text-gray-400 opacity-80 transition-colors duration-300">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h1>
     </div>
 
     <article class="quran-text w-full">
