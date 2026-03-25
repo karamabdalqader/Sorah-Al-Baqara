@@ -65,17 +65,7 @@ html_template = """<!DOCTYPE html>
             user-select: none;
         }
 
-        #control-strip {
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-            opacity: 0;
-            transform: translate(-50%, 20px);
-        }
-        
-        body:hover #control-strip,
-        .scrolling #control-strip {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
+
 
         .content-container {
             max-width: 700px; 
@@ -209,9 +199,16 @@ html_template = """<!DOCTYPE html>
                 <span class="text-3xl font-bold" id="page-progress-ar">الصفحة ٢ من ٤٩</span>
             </div>
         </div>
-        <div class="hidden md:flex items-center gap-4 py-3 px-6 rounded-full bg-accent/10 dark:bg-accent/20 border-2 border-accent/20 cursor-pointer hover:bg-accent/20 dark:hover:bg-accent/30 transition-colors" onclick="restartRecitation()" title="Start from the beginning">
-            <span class="material-symbols-outlined text-[24px] text-accent">restart_alt</span>
-            <span class="text-[12px] uppercase tracking-[0.2em] font-extrabold text-text-ui dark:text-gray-200 transition-colors">البدء من جديد</span>
+        <div class="flex items-center gap-2">
+            <button aria-label="Increase Font Size" title="Font Size" class="p-2 rounded-full hover:bg-accent/10 dark:hover:bg-accent/20 text-text-ui dark:text-gray-300 transition-colors" onclick="changeFontSize()">
+                <span class="material-symbols-outlined text-[24px] hover:scale-110 transition-transform">format_size</span>
+            </button>
+            <button aria-label="Toggle Theme" title="Toggle Theme" class="p-2 rounded-full hover:bg-accent/10 dark:hover:bg-accent/20 text-text-ui dark:text-gray-300 transition-colors" onclick="toggleNightMode()">
+                <span class="material-symbols-outlined text-[24px] hover:scale-110 transition-transform" id="theme-icon">dark_mode</span>
+            </button>
+            <button aria-label="Restart Recitation" title="Restart Recitation" class="p-2 rounded-full hover:bg-accent/10 dark:hover:bg-accent/20 text-text-ui dark:text-gray-300 transition-colors" onclick="restartRecitation()">
+                <span class="material-symbols-outlined text-[24px] hover:scale-110 transition-transform">restart_alt</span>
+            </button>
         </div>
     </div>
     <div id="progress-container">
@@ -239,23 +236,7 @@ html_template = """<!DOCTYPE html>
     </div>
 </main>
 
-<div class="fixed bottom-10 left-1/2 transform -translate-x-1/2 flex items-center gap-8 px-8 py-4 bg-surface/90 dark:bg-[#1f1f1f]/90 backdrop-blur-md rounded-full border border-muted/30 dark:border-gray-700 shadow-lg z-50 transition-colors duration-300" id="control-strip">
-    <button aria-label="Increase Font Size" class="flex items-center justify-center text-text-ui dark:text-gray-400 hover:text-text-main dark:hover:text-white transition-colors group" onclick="changeFontSize()">
-        <span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">format_size</span>
-        <span class="ml-2 font-ui text-sm font-medium">Size</span>
-    </button>
-    <div class="h-5 w-px bg-muted/40 dark:bg-gray-700 transition-colors duration-300"></div>
-    <button aria-label="Toggle Theme" class="flex items-center justify-center text-text-ui dark:text-gray-400 hover:text-text-main dark:hover:text-white transition-colors group" onclick="toggleNightMode()">
-        <span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform" id="theme-icon">dark_mode</span>
-        <span class="ml-2 font-ui text-sm font-medium" id="theme-text">Night</span>
-    </button>
-    <div class="h-5 w-px bg-muted/40 dark:bg-gray-700 transition-colors duration-300"></div>
-    <button aria-label="Restart Recitation" class="flex items-center justify-center text-text-ui dark:text-gray-400 hover:text-text-main dark:hover:text-white transition-colors group" onclick="restartRecitation()">
-        <span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">restart_alt</span>
-        <span class="ml-2 font-ui text-sm font-medium">Restart</span>
-    </button>
 
-</div>
 
 <script>
     const progressBar = document.getElementById('progress-bar');
@@ -315,13 +296,10 @@ html_template = """<!DOCTYPE html>
 
     function updateThemeIcon(isDark) {
         const icon = document.getElementById('theme-icon');
-        const text = document.getElementById('theme-text');
         if (isDark) {
             icon.textContent = 'light_mode';
-            text.textContent = 'Day';
         } else {
             icon.textContent = 'dark_mode';
-            text.textContent = 'Night';
         }
     }
 
